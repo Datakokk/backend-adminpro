@@ -1,7 +1,8 @@
 const { Schema, model } = require('mongoose');
 
 const HospitalSchema = Schema({
-     name: {
+     
+    name: {
          type: String,
          required: true
      },
@@ -9,6 +10,7 @@ const HospitalSchema = Schema({
          type: String,
      }, 
      user: {
+        required: true,
         type: Schema.Types.ObjectId,
         ref: 'User'  
      }
