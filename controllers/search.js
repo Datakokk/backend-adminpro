@@ -28,7 +28,7 @@ const getFull = async ( req, res=response ) => {
     })
 }
 
-const getDocumentColection = async ( req, res=response ) => {
+const getDocumentCollection = async ( req, res=response ) => {
 
     const table = req.params.table;
     const search = req.params.search;
@@ -70,5 +70,5 @@ const getDocumentColection = async ( req, res=response ) => {
 
 module.exports = {
     getFull,
-    getDocumentColection,
+    getDocumentCollection,
 }
