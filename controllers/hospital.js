@@ -71,7 +71,7 @@
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            ok: true, 
+            ok: false, 
             msg: 'Unexpected error checked with administrator'
         })
     }
@@ -101,7 +101,7 @@
 
     } catch (error) {
         res.status(500).json({
-            ok: true,
+            ok: false,
             msg: 'Unexpectd error checked with administrator'
         })
     }
