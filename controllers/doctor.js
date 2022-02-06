@@ -38,18 +38,71 @@ const createDoctors = async ( req, res=response ) => {
     }
 }
 
-const updateDoctors = ( req, res=response ) => {
-    res.json({
-        ok: true,
-        msg: 'updateDoctors',
-    });
+const updateDoctors = async( req, res=response ) => {
+
+    const id = req.params.id;
+    const uid = req.uid;
+
+    try {
+
+        const doctorDB = await Doctor.findById( id );
+
+        if( !doctorDB ){
+            return res.status(404).json({
+                ok: true, 
+                msg: 'Doctor not found'
+            })
+        }
+
+        const changeDoctor = {
+            ...req.body,
+            user: uid,
+        };
+
+        const doctorUpdated = await Doctor.findByIdAndUpdate( id, changeDoctor, { new: true });
+        
+        res.json({
+            ok: true,
+            msg: doctorUpdated,
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Unexpected error checked with administrator'
+        })
+    }
 }
 
-const deleteDoctor = ( req, res=response ) => {
-    res.json({
-        ok: true,
-        msg: 'deleteDoctor'
-    })
+const deleteDoctor = async( req, res=response ) => {
+    
+    const id = req.params.id;
+
+    try {
+
+        const doctorDB = await Doctor.findById( id );
+
+        if( !doctorDB ){
+            return res.status(404).json({
+                ok: true, 
+                msg: 'Doctor not found',
+            })
+        }
+
+        await Doctor.findByIdAndDelete( id );
+
+        res.json({
+            ok: true,
+            msg: 'Doctor deleted'
+        })
+        
+    } catch (error) {
+        res.status(500).json({
+            ok: false, 
+            msg: 'Unexpected error checked with administrator'
+        })
+        
+    }
 }
 
 module.exports =  {
