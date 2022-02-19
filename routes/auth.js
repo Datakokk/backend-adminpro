@@ -21,7 +21,7 @@ login
 
 router.post('/google', 
 [
-    check('token', 'Google token is mandatory').not().isEmpty() ,
+    check('token', 'Google token is mandatory2').not().isEmpty() ,
     fieldsValidation 
 ],
 googleSignIn

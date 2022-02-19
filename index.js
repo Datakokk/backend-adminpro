@@ -31,6 +31,6 @@ app.use('/api/login', require('./routes/auth'));
 
 
 app.listen( process.env.PORT, () => {
-    console.log(`Server running in the port ${process.env.PORT}!!`);
+    console.log(`Server running in the port ${process.env.PORT}!!2`);
 })
 

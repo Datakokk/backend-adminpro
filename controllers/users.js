@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const User = require('../models/user');
 const { generateJWT } = require('../helpers/jwt');
+const user = require('../models/user');
 
 const getUsers = async (req, res) => {
 
@@ -105,7 +106,15 @@ const updateUser = async (req, res=response, next) => {
                 }
             }
             
-            fields.email = email;
+            if( !userDB.google){
+
+                fields.email = email;
+            }else if( userDB.email !== email){
+                return res.status(400).json({
+                    ok: false,
+                    msg: `Googles users can't change their email`
+                })
+            }
             
             const userUpdated = await User.findByIdAndUpdate(uid, fields, { new:true });
             

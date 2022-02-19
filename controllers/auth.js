@@ -103,9 +103,14 @@ const renewToken = async( req, res=response ) => {
     // Generate wet-token -JWT
     const token = await generateJWT( uid );
 
+    // Get the user by uid
+    const userDB = await User.findById( uid );
+
+
     res.json({
         ok: true,
-        token
+        token,
+        userDB
     })
 }
 
